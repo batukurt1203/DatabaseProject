@@ -3,7 +3,7 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace dbapp.Helpers;
+namespace DatabaseProject.Helpers;
 
  public class SqlHelper {
         private readonly SqlConnection _connection;

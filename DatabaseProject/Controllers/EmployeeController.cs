@@ -1,12 +1,12 @@
 ﻿using System.Data;
 using System.Security.Claims;
-using dbapp.Helpers;
-using dbapp.Models;
-using dbapp.Services;
+using DatabaseProject.Helpers;
+using DatabaseProject.Models;
+using DatabaseProject.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace dbapp.Controllers;
+namespace DatabaseProject.Controllers;
 
 [Authorize(Roles = "Employee")]
 public class EmployeeController(SqlHelper sqlHelper, JwtService jwtService) : Controller {

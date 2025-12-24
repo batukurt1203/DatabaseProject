@@ -1,11 +1,11 @@
 ﻿using System.Data;
 using System.Security.Claims;
-using dbapp.Helpers;
-using dbapp.Models;
-using dbapp.Services;
+using DatabaseProject.Helpers;
+using DatabaseProject.Models;
+using DatabaseProject.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace dbapp.Controllers;
+namespace DatabaseProject.Controllers;
 
 public class ManagerController(SqlHelper sqlHelper, JwtService jwtService) : Controller {
     [HttpGet]

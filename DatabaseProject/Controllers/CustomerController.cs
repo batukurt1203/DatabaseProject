@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using dbapp.Helpers;
+using DatabaseProject.Helpers;
 using System.Collections.Generic;
 using System.Data;
 using System.Security.Claims;
-using dbapp.Models;
-using dbapp.Services;
+using DatabaseProject.Models;
+using DatabaseProject.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace dbapp.Controllers {
+namespace DatabaseProject.Controllers {
     [Authorize(Roles = "Customer")]
     public class CustomerController(SqlHelper sqlHelper, JwtService jwtService) : Controller {
         [HttpGet]

@@ -1,4 +1,4 @@
-﻿namespace dbapp.Models;
+﻿namespace DatabaseProject.Models;
 
 public class LicenseViewModel
 {

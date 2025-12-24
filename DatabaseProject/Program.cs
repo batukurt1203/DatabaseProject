@@ -1,28 +1,83 @@
-using DatabaseProject.Components;
+using System.Text;
+using DatabaseProject.Helpers;
+using DatabaseProject.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+IConfiguration configuration = builder.Configuration;
+
+builder.Services.AddSingleton(configuration);
+builder.Services.AddScoped<SqlHelper>();
+
+builder.Services.AddScoped<JwtService>();
+
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddRouting(options => {
+    options.LowercaseUrls = true;
+    options.AppendTrailingSlash = false;
+});
+
+builder.Services.AddAuthentication(options => {
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options => {
+    options.TokenValidationParameters = new TokenValidationParameters {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+    };
+
+    options.Events = new JwtBearerEvents {
+        OnMessageReceived = context => {
+            context.Token = context.Request.Cookies["JWT"];
+            return Task.CompletedTask;
+        }
+    };
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
+if (!app.Environment.IsDevelopment()) {
+    app.UseExceptionHandler("/Error/Error");
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+app.UseStatusCodePagesWithReExecute("/Error/HandleError", "?statusCode={0}");
 
+app.UseStaticFiles();
 
-app.UseAntiforgery();
+app.UseRouting();
 
-app.MapStaticAssets();
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=ChoosePersonType}");
+
+app.MapControllerRoute(
+    name: "Login",
+    pattern: "{controller=Home}/{action=Login}");
+
+app.MapControllerRoute(
+    name: "CustomerRegister",
+    pattern: "{controller=Home}/{action=CustomerRegister}");
+
+app.MapControllerRoute(
+    name: "EmployeeRegister",
+    pattern: "{controller=Home}/{action=EmployeeRegister}");
+
+app.MapControllerRoute(
+    name: "CustomerDashboard",
+    pattern: "{controller=Customer}/{action=CustomerDashboard}");
 
 app.Run();

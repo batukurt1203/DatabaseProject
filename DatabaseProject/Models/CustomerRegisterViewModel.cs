@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace dbapp.Models;
+namespace DatabaseProject.Models;
 
 public class CustomerRegisterViewModel {
     [Required] public string FullName { get; set; } 

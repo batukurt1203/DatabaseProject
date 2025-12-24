@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using dbapp.Models;
+using DatabaseProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace dbapp.Controllers;
+namespace DatabaseProject.Controllers;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 public class ErrorController : Controller {

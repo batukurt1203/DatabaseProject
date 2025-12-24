@@ -1,4 +1,4 @@
-﻿namespace dbapp.Models;
+﻿namespace DatabaseProject.Models;
 
 public class GetFeatureRequestViewModel {
     public string ProductName { get; set; } = string.Empty;

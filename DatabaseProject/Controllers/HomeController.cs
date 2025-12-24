@@ -2,11 +2,11 @@ using System.Data;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using dbapp.Helpers;
-using dbapp.Models;
-using dbapp.Services;
+using DatabaseProject.Helpers;
+using DatabaseProject.Models;
+using DatabaseProject.Services;
 
-namespace dbapp.Controllers;
+namespace DatabaseProject.Controllers;
 
 public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Controller {
     public IActionResult ChoosePersonType() {

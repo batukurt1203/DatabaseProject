@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace dbapp.Services;
+namespace DatabaseProject.Services;
 
 public class JwtService(IConfiguration configuration) {
     private readonly TokenValidationParameters _tokenValidationParameters = new() {
