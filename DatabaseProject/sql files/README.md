@@ -1,0 +1,1 @@
+Create -> Trigger -> Procedure -> View -> Insertion
