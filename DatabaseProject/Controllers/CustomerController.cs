@@ -15,8 +15,6 @@ namespace DatabaseProject.Controllers {
         public IActionResult CustomerDashboard() {
             return View();
         }
-
-
         
         [HttpGet]
         public IActionResult GetLicense() {
