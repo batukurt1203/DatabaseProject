@@ -24,31 +24,6 @@
         </div>
     }
 
-    <!-- Customer Ekle Formu -->
-    <div class="card mb-4">
-        <div class="card-header bg-success text-white">
-            <h5 class="mb-0"><i class="fas fa-user-plus"></i> Yeni Customer Ekle</h5>
-        </div>
-        <div class="card-body">
-            <form asp-action="AddCustomer" method="post">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="fullName" class="form-label">Ad Soyad</label>
-                        <input type="text" class="form-control" id="fullName" name="fullName" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-success">
-                    <i class="fas fa-plus"></i> Customer Ekle
-                </button>
-                <small class="text-muted ms-2">* Varsayılan şifre: 0000</small>
-            </form>
-        </div>
-    </div>
-
     <!-- Customer Listesi -->
     <div class="card">
         <div class="card-header bg-warning text-dark">

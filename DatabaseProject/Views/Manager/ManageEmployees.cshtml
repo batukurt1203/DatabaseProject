@@ -24,30 +24,6 @@
         </div>
     }
 
-    <!-- Employee Ekle Formu -->
-    <div class="card mb-4">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><i class="fas fa-user-plus"></i> Yeni Employee Ekle</h5>
-        </div>
-        <div class="card-body">
-            <form asp-action="AddEmployee" method="post">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="fullName" class="form-label">Ad Soyad</label>
-                        <input type="text" class="form-control" id="fullName" name="fullName" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Employee Ekle
-                </button>
-                <small class="text-muted ms-2">* Varsayılan şifre: 0000</small>
-            </form>
-        </div>
-    </div>
 
     <!-- Employee Listesi -->
     <div class="card">

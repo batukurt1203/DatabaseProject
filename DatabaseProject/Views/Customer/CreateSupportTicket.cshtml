@@ -1,0 +1,86 @@
+﻿@model DatabaseProject.Models.CreateTicketViewModel
+
+@{
+    ViewData["Title"] = "Destek Talebi Oluştur";
+    // Eğer customer için farklı bir layout kullanıyorsanız burayı değiştirin (örn: _CustomerLayout)
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <h2 class="mb-4">
+                <i class="fas fa-headset text-primary"></i> Destek Merkezi
+            </h2>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (!ViewData.ModelState.IsValid && ViewData.ModelState[string.Empty] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @foreach (var error in ViewData.ModelState[string.Empty].Errors)
+                    {
+                        <div><i class="fas fa-exclamation-circle"></i> @error.ErrorMessage</div>
+                    }
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-signature"></i> Yeni Destek Talebi (Support Ticket)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="SubmitSupportTicket" method="post">
+
+                        <div class="mb-3">
+                            <label asp-for="ProductName" class="form-label fw-bold">İlgili Ürün</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-box"></i></span>
+                                <select asp-for="ProductName" asp-items="ViewBag.Products" class="form-select" required>
+                                    <option value="" disabled selected>-- Lütfen sorun yaşadığınız ürünü seçin --</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="IssueDescription" class="form-label fw-bold">Sorun Açıklaması</label>
+                            <div class="form-text mb-2 text-muted">
+                                Lütfen sorunu mümkün olduğunca detaylı anlatınız. Hata kodları veya adımları belirtmeniz çözümü hızlandıracaktır.
+                            </div>
+                            <textarea asp-for="IssueDescription" class="form-control" rows="6" placeholder="Örn: X ürününde rapor almaya çalışırken sistem donuyor..." required></textarea>
+                            <span asp-validation-for="IssueDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="CustomerDashboard" class="btn btn-secondary me-md-2">
+                                <i class="fas fa-arrow-left"></i> İptal / Geri Dön
+                            </a>
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-paper-plane"></i> Talebi Gönder
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
