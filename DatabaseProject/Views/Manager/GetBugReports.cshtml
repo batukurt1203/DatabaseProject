@@ -1,37 +1,70 @@
 ﻿@model List<DatabaseProject.Models.GetBugReportViewModel>
 
 @{
-    ViewBag.Title = "Bug Reports";
-    
+    ViewBag.Title = "Hata Raporları";
+    Layout = "_managerNavBar";
 }
 
-<h2>Bug Reports</h2>
+<div class="fixed-background"></div>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Product Name</th>
-        <th>Version ID</th>
-        <th>Message</th>
-        <th>Company Name</th>
-        <th>Feedback Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var report in Model)
-    {
-        <tr>
-            <td>@report.ProductName</td>
-            <td>@report.VersionID</td>
-            <td>@report.Message</td>
-            <td>@report.CompanyName</td>
-            <td>@report.FeedbackDate.ToString("yyyy-MM-dd")</td>
-        </tr>
-    }
-    </tbody>
-</table>
-<div class="form-group text-center mt-3">
-    <a asp-controller="Manager" asp-action="ManagerDashboard" class="text-black">Click for return previous
-        page!</a>
+<div class="container mt-5">
+    <div class="glass-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3">
+            <div>
+                <h2 class="mb-0">Hata Bildirimleri</h2>
+                <span class="text-white-50 small">Müşterilerden gelen teknik sorunlar</span>
+            </div>
+            <span class="badge bg-danger px-3 py-2 rounded-pill">Toplam: @Model.Count</span>
+        </div>
 
+        <div class="table-responsive">
+            <table class="table table-dark table-hover table-transparent">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Versiyon</th>
+                        <th>Hata Mesajı</th>
+                        <th>Şirket</th>
+                        <th class="text-end">Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var report in Model)
+                {
+                    <tr>
+                        <td class="fw-bold text-danger">@report.ProductName</td>
+                        <td><span class="badge bg-secondary">v @report.VersionID</span></td>
+                        <td class="text-white-50">@report.Message</td>
+                        <td>@report.CompanyName</td>
+                        <td class="text-end">@report.FeedbackDate.ToString("dd.MM.yyyy")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mt-4">
+            <a asp-controller="Manager" asp-action="ManagerDashboard" class="text-white-50 text-decoration-none hover-link">
+                <i class="fas fa-arrow-left me-1"></i> Panele Dön
+            </a>
+        </div>
+    </div>
 </div>
+
+<style>
+    /* Ortak stiller layout veya dashboard ile aynı */
+    .fixed-background {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)), 
+                    url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+    }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: white;
+    }
+    .table-transparent { --bs-table-bg: transparent; --bs-table-color: white; --bs-table-border-color: rgba(255,255,255,0.1); }
+    .table-transparent th { font-weight: 500; text-transform: uppercase; font-size: 0.85rem; color: #a074fc; }
+    .table-transparent td { vertical-align: middle; padding: 15px 10px; }
+    .hover-link:hover { color: #a074fc !important; text-decoration: underline !important; }
+</style>

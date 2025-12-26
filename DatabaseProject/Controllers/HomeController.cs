@@ -9,6 +9,8 @@ using DatabaseProject.Services;
 namespace DatabaseProject.Controllers;
 
 public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Controller {
+   
+    
     public IActionResult ChoosePersonType() {
         return View();
     }
@@ -133,8 +135,15 @@ public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Contro
     public IActionResult EmployeeRegister() {
         return View();
     }
-
-
+// Çıkış Yapma İşlemi (Doğru Kod)
+    public IActionResult Logout()
+    {
+        // 1. Tarayıcıdaki giriş anahtarını (Cookie) sil
+        Response.Cookies.Delete("JWT");
+    
+        // 2. Başlangıç ekranına yönlendir
+        return RedirectToAction("ChoosePersonType", "Home");
+    }
     [HttpPost]
     public IActionResult EmployeeRegister(EmployeeRegisterViewModel model) {
         if (!ModelState.IsValid) {
