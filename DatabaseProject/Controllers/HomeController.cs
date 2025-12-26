@@ -10,12 +10,12 @@ namespace DatabaseProject.Controllers;
 
 public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Controller {
    
-    
+    // Navigation to the person type selection page
     public IActionResult ChoosePersonType() {
         return View();
     }
 
-    
+    // Displays the login page and handles auto-login if token exists
     [HttpGet]
     public IActionResult Login() {
         var token = Request.Cookies["JWT"];
@@ -24,6 +24,8 @@ public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Contro
         if (principal == null) return View();
         var role = principal.FindFirst(ClaimTypes.Role);
         if (role == null) return View();
+        
+        // Redirect based on user role
         return role.Value switch {
             "Employee" => RedirectToAction("EmployeeDashboard", "Employee"),
             "Manager" => RedirectToAction("ManagerDashboard", "Manager"),
@@ -32,7 +34,7 @@ public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Contro
         };
     }
 
-    
+    // Handles the login logic and JWT token generation
     [HttpPost]
     public IActionResult Login(LoginViewModel model) {
         if (!ModelState.IsValid) return View(model);
@@ -44,9 +46,7 @@ public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Contro
             FROM [dbo].[PERSON] 
             WHERE Email = @Email AND PASSWORD_ = @Password AND PERSONTYPE = @PersonType";
                 
-
                 using (var command = new SqlCommand(query, connection)) {
-                    
                     SqlHelper.AddParameter(command, "@Email", SqlDbType.VarChar, model.UserEmail);
                     SqlHelper.AddParameter(command, "@Password", SqlDbType.VarChar, model.Password);
                     SqlHelper.AddParameter(command, "@PersonType", SqlDbType.VarChar, model.UserType);
@@ -59,16 +59,15 @@ public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Contro
                     }
 
                     var userId = Convert.ToInt32(result);
-
                     var token = jwtService.GenerateToken(userId, model.UserEmail, model.UserType);
 
+                    // Set JWT cookie
                     Response.Cookies.Append("JWT", token, new CookieOptions {
                         HttpOnly = true,
                         Secure = HttpContext.Request.IsHttps,
                         SameSite = SameSiteMode.Strict,
                         Expires = DateTime.UtcNow.AddMinutes(120)
                     });
-                    
                     
                     return model.UserType switch {
                         "Employee" => RedirectToAction("EmployeeDashboard", "Employee"),
@@ -84,29 +83,25 @@ public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Contro
         }
     }
 
-    
     [HttpGet]
     public IActionResult CustomerRegister() {
         return View();
     }
 
-    
+    // Handles customer registration via Stored Procedure
     [HttpPost]
     public IActionResult CustomerRegister(CustomerRegisterViewModel model) {
         if (!ModelState.IsValid) {
             ViewBag.ErrorMessage = "Lütfen tüm alanları doldurun.";
-            Console.WriteLine("Model state is not valid");
             return View(model);
         }
 
         try {
             using (var connection = sqlHelper.OpenConnection()) {
                 string storedProcedure = "pro_CreateCustomer";
-                Console.WriteLine(storedProcedure);
-
                 using (var command = new SqlCommand(storedProcedure, connection)) {
                     command.CommandType = CommandType.StoredProcedure;
-
+                    // Adding parameters for customer creation
                     SqlHelper.AddParameter(command, "@FullNamePar", SqlDbType.NVarChar, model.FullName);
                     SqlHelper.AddParameter(command, "@HireDatePar", SqlDbType.Date, DateTime.Now);
                     SqlHelper.AddParameter(command, "@EmailPar", SqlDbType.VarChar, model.UserEmail);
@@ -114,52 +109,43 @@ public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Contro
                     SqlHelper.AddParameter(command, "@CompanyName", SqlDbType.NVarChar, model.CompanyName);
 
                     if (connection.State != ConnectionState.Open) connection.Open();
-
                     command.ExecuteNonQuery();
                 }
             }
-
             TempData["SuccessMessage"] = "Kayıt başarılı! Lütfen giriş yapın.";
             return RedirectToAction("Login", "Home");
         } catch (Exception ex) {
-            ModelState.AddModelError(string.Empty, "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.");
-            ModelState.AddModelError(string.Empty, ex.Message);
-            Console.WriteLine(ex.Message);
-
+            ModelState.AddModelError(string.Empty, "Beklenmedik bir hata oluştu.");
             return View(model);
         }
     }
 
-    
     [HttpGet]
     public IActionResult EmployeeRegister() {
         return View();
     }
-// Çıkış Yapma İşlemi (Doğru Kod)
+
+    // Logs out the user by deleting the cookie
     public IActionResult Logout()
     {
-        // 1. Tarayıcıdaki giriş anahtarını (Cookie) sil
         Response.Cookies.Delete("JWT");
-    
-        // 2. Başlangıç ekranına yönlendir
         return RedirectToAction("ChoosePersonType", "Home");
     }
+
+    // Handles employee registration via Stored Procedure
     [HttpPost]
     public IActionResult EmployeeRegister(EmployeeRegisterViewModel model) {
         if (!ModelState.IsValid) {
             ViewBag.ErrorMessage = "Lütfen tüm alanları doldurun.";
-            Console.WriteLine("Model state is not valid");
             return View(model);
         }
 
         try {
             using (var connection = sqlHelper.OpenConnection()) {
                 string storedProcedure = "pro_CreateEmployee";
-                Console.WriteLine(storedProcedure);
-
                 using (var command = new SqlCommand(storedProcedure, connection)) {
                     command.CommandType = CommandType.StoredProcedure;
-
+                    // Adding parameters for employee creation
                     SqlHelper.AddParameter(command, "@FullNamePar", SqlDbType.NVarChar, model.FullName);
                     SqlHelper.AddParameter(command, "@HireDatePar", SqlDbType.Date, DateTime.Now);
                     SqlHelper.AddParameter(command, "@EmailPar", SqlDbType.VarChar, model.UserEmail);
@@ -167,18 +153,13 @@ public class HomeController(SqlHelper sqlHelper, JwtService jwtService) : Contro
                     SqlHelper.AddParameter(command, "@ManagerMail", SqlDbType.VarChar, model.UserEmail);
 
                     if (connection.State != ConnectionState.Open) connection.Open();
-
                     command.ExecuteNonQuery();
                 }
             }
-
             TempData["SuccessMessage"] = "Kayıt başarılı! Lütfen giriş yapın.";
             return RedirectToAction("Login", "Home");
         } catch (Exception ex) {
-            ModelState.AddModelError(string.Empty, "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.");
-            ModelState.AddModelError(string.Empty, ex.Message);
-            Console.WriteLine(ex.Message);
-
+            ModelState.AddModelError(string.Empty, "Beklenmedik bir hata oluştu.");
             return View(model);
         }
     }
