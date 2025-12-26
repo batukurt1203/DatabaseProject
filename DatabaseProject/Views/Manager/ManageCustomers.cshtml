@@ -1,0 +1,100 @@
+﻿@model List<DatabaseProject.Models.CustomerViewModel>
+
+@{
+    ViewData["Title"] = "Customer Yönetimi";
+    Layout = "_managerNavBar";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Customer Yönetimi</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Customer Ekle Formu -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0"><i class="fas fa-user-plus"></i> Yeni Customer Ekle</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddCustomer" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="fullName" class="form-label">Ad Soyad</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Customer Ekle
+                </button>
+                <small class="text-muted ms-2">* Varsayılan şifre: 0000</small>
+            </form>
+        </div>
+    </div>
+
+    <!-- Customer Listesi -->
+    <div class="card">
+        <div class="card-header bg-warning text-dark">
+            <h5 class="mb-0"><i class="fas fa-users"></i> Customer Listesi</h5>
+        </div>
+        <div class="card-body">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ad Soyad</th>
+                                <th>Email</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var customer in Model)
+                            {
+                                <tr>
+                                    <td>@customer.PersonID</td>
+                                    <td>@customer.FullName</td>
+                                    <td>@customer.Email</td>
+                                    <td>
+                                        <form asp-action="DeleteCustomer" method="post" style="display:inline;"
+                                              onsubmit="return confirm('Bu customer\'ı silmek istediğinizden emin misiniz?');">
+                                            <input type="hidden" name="personId" value="@customer.PersonID" />
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Sil
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle"></i> Henüz customer kaydı bulunmamaktadır.
+                </div>
+            }
+        </div>
+    </div>
+</div>
