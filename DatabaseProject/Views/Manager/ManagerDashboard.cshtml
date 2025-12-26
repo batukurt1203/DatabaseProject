@@ -8,8 +8,8 @@
 <div class="container content-wrapper">
     <div class="row mb-5">
         <div class="col-12 text-center text-white">
-            <h2 class="dashboard-title">Yönetim Merkezi</h2>
-            <p class="text-white-50">Gelen geri bildirimleri ve sistem durumunu buradan yönetebilirsiniz.</p>
+            <h2 class="dashboard-title">Management Center</h2>
+            <p class="text-white-50">You can manage feedbacks and system status from here</p>
         </div>
     </div>
 
@@ -19,8 +19,8 @@
             <a asp-controller="Manager" asp-action="GetBugReports" class="card-link">
                 <div class="glass-card text-center p-5 h-100 hover-effect">
                     <div class="icon-box mb-3 text-danger">🐛</div>
-                    <h3>Hata Raporları</h3>
-                    <p class="small text-white-50">Müşterilerden gelen teknik sorun bildirimlerini inceleyin.</p>
+                    <h3>Bug Reports</h3>
+                    <p class="small text-white-50">Analyze technical problem notifications from customers</p>
                 </div>
             </a>
         </div>
@@ -29,8 +29,8 @@
             <a asp-controller="Manager" asp-action="GetFeatureRequests" class="card-link">
                 <div class="glass-card text-center p-5 h-100 hover-effect">
                     <div class="icon-box mb-3 text-warning">✨</div>
-                    <h3>Özellik İstekleri</h3>
-                    <p class="small text-white-50">Yeni özellik taleplerini ve oylamaları görüntüleyin.</p>
+                    <h3>Feature Request</h3>
+                    <p class="small text-white-50"> Display new feature requests and votings.</p>
                 </div>
             </a>
         </div>
@@ -61,7 +61,7 @@
     .hover-effect:hover {
         transform: translateY(-10px);
         background: rgba(255, 255, 255, 0.1);
-        border-color: #a074fc; /* Mor Çerçeve */
+        border-color: #a074fc; 
         box-shadow: 0 10px 30px rgba(160, 116, 252, 0.2);
     }
 

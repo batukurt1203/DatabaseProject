@@ -12,8 +12,8 @@
         
         <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3">
             <div>
-                <h2 class="mb-0">Aktif Projeler</h2>
-                <span class="text-white-50 small">Atandığınız projelerin listesi</span>
+                <h2 class="mb-0"> Active Projects</h2>
+                <span class="text-white-50 small">Assigned Project List</span>
             </div>
             <span class="badge bg-primary px-3 py-2 rounded-pill">Toplam: @Model.Count()</span>
         </div>
@@ -22,8 +22,8 @@
         {
             <div class="text-center py-5">
                 <div class="fs-1 mb-3">📂</div>
-                <h4>Henüz bir projeniz yok</h4>
-                <p class="text-white-50">Şu an için size atanmış bir proje bulunmamaktadır.</p>
+                <h4>You have no project yet.</h4>
+                <p class="text-white-50"> There is no project which is assigned to you now.</p>
             </div>
         }
         else
@@ -32,10 +32,10 @@
                 <table class="table table-dark table-hover table-transparent">
                     <thead>
                         <tr>
-                            <th scope="col" class="text-primary ps-3">Proje Adı</th>
-                            <th scope="col">Açıklama</th>
-                            <th scope="col">Yayın Tarihi</th>
-                            <th scope="col" class="text-end pe-3">Durum</th>
+                            <th scope="col" class="text-primary ps-3">Project Name</th>
+                            <th scope="col">Explanation</th>
+                            <th scope="col">Release Date</th>
+                            <th scope="col" class="text-end pe-3">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                             </td>
                             <td class="text-end pe-3">
                                 <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25">
-                                    Aktif
+                                    Active
                                 </span>
                             </td>
                         </tr>
@@ -62,14 +62,14 @@
         
         <div class="mt-4">
             <a asp-controller="Employee" asp-action="EmployeeDashboard" class="text-white-50 text-decoration-none hover-link">
-                <i class="fas fa-arrow-left me-1"></i> Panele Dön
+                <i class="fas fa-arrow-left me-1"></i> Back to Panel
             </a>
         </div>
     </div>
 </div>
 
 <style>
-    /* Arka Plan */
+    /* Background */
     .fixed-background {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), 
@@ -77,7 +77,7 @@
         background-size: cover;
     }
 
-    /* Kart */
+    /* Card */
     .glass-card {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(10px);
@@ -86,7 +86,7 @@
         color: white;
     }
 
-    /* Tablo Özelleştirme */
+    
     .table-transparent {
         --bs-table-bg: transparent;
         --bs-table-color: white;
@@ -101,7 +101,6 @@
     .table-transparent td {
         vertical-align: middle; padding: 15px 5px;
     }
-
-    /* Hover Link */
+    
     .hover-link:hover { color: #0d6efd !important; text-decoration: underline !important; }
 </style>

@@ -7,25 +7,25 @@
 
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
     <div class="glass-card p-5 w-100" style="max-width: 500px;">
-        <h2 class="text-center mb-4">Lisans Satın Al</h2>
+        <h2 class="text-center mb-4">Buy a Licence</h2>
         
         @using (Html.BeginForm("BuyLicense", "Customer", FormMethod.Post))
         {
             <div class="mb-4">
-                <label class="form-label text-white-50">Ürün Seçimi</label>
+                <label class="form-label text-white-50">Product Pick</label>
                 @Html.DropDownListFor(model => model.ProductName, 
                     new SelectList(ViewBag.Products, "Value", "Text"), 
-                    "Bir ürün seçiniz...", 
+                    "Pick a product...", 
                     new { @class = "form-control custom-input" })
             </div>
 
             <div class="mb-4">
-                <label class="form-label text-white-50">Lisans Süresi (Gün)</label>
+                <label class="form-label text-white-50">Licence Time (Day)</label>
                 @Html.TextBoxFor(model => model.LicenseTerm, new { @class = "form-control custom-input", placeholder = "Örn: 365" })
             </div>
   
             <div class="d-grid gap-2 mt-5">
-                <button type="submit" class="btn btn-warning fw-bold py-2">Satın Almayı Tamamla</button>
+                <button type="submit" class="btn btn-warning fw-bold py-2">Complete Buying</button>
             </div>
 
             <div class="text-center mt-3">
@@ -46,8 +46,7 @@
         background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: white;
     }
-
-    /* Modern Input Stilleri */
+    
     .custom-input {
         background: rgba(0, 0, 0, 0.3) !important;
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -62,7 +61,7 @@
         box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
     }
     
-    /* Select kutusu içindeki optionlar siyah olsun (okunabilirlik için) */
+    
     .custom-input option {
         background-color: #333;
         color: white;

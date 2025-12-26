@@ -8,8 +8,8 @@ Layout = "_employeeNavBar";
 <div class="container content-wrapper">
     <div class="row mb-5">
         <div class="col-12 text-center text-white">
-            <h2 class="dashboard-title">Personel Paneli</h2>
-            <p class="text-white-50">Atandığınız projeleri ve görevleri buradan takip edebilirsiniz.</p>
+            <h2 class="dashboard-title">Personel Panel</h2>
+            <p class="text-white-50">You can follow the projects and missions which you have assigned.</p>
         </div>
     </div>
 
@@ -19,8 +19,8 @@ Layout = "_employeeNavBar";
             <a asp-controller="Employee" asp-action="GetProjects" class="card-link">
                 <div class="glass-card text-center p-5 h-100 hover-effect">
                     <div class="icon-box mb-3 text-primary">🚀</div>
-                    <h3>Projelerim</h3>
-                    <p class="small text-white-50">Dahil olduğunuz aktif projeleri görüntüleyin</p>
+                    <h3>My Projects</h3>
+                    <p class="small text-white-50">View the projects which you are included.</p>
                 </div>
             </a>
         </div>
@@ -31,12 +31,11 @@ Layout = "_employeeNavBar";
 </div>
 
 <style>
-    /* ORTAK BACKGROUND VE KART STİLLERİ */
     .fixed-background {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)),
         url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-        /* Çalışanlar için farklı, ofis/toplantı temalı bir fotoğraf seçtim */
+        
         background-size: cover; background-position: center;
     }
 
@@ -55,7 +54,7 @@ Layout = "_employeeNavBar";
     .hover-effect:hover {
         transform: translateY(-10px);
         background: rgba(255, 255, 255, 0.1);
-        border-color: #0d6efd; /* Mavi Çerçeve */
+        border-color: #0d6efd; 
         box-shadow: 0 10px 30px rgba(13, 110, 253, 0.2);
     }
 

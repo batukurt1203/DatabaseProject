@@ -9,27 +9,27 @@ Layout = "_customerNavBar";
     <div class="glass-card p-5 w-100" style="max-width: 600px;">
         <div class="text-center mb-4">
             <div class="icon-circle mb-3">✨</div>
-            <h2 class="mb-2">Özellik İste</h2>
-            <p class="text-white-50 small">Ürünlerimizde görmek istediğiniz yenilikleri paylaşın.</p>
+            <h2 class="mb-2">Ask for Feature</h2>
+            <p class="text-white-50 small">Share innovations which you want to see in our products.</p>
         </div>
 
         @using (Html.BeginForm("SubmitFeatureRequest", "Customer", FormMethod.Post))
         {
         <div class="mb-3">
-            <label class="form-label text-warning small">İlgili Ürün</label>
+            <label class="form-label text-warning small">Related Product</label>
             @Html.DropDownListFor(model => model.ProductName,
             new SelectList(ViewBag.Products, "Value", "Text"),
-            "Bir ürün seçiniz...",
+            "Pick a product...",
             new { @class = "form-control custom-input" })
         </div>
 
         <div class="mb-3">
-            <label class="form-label text-warning small">Öneri / İstek</label>
-            @Html.TextAreaFor(model => model.Message, new { @class = "form-control custom-input", rows = "4", placeholder = "Fikrinizi buraya yazın..." })
+            <label class="form-label text-warning small">Suggestion / Request</label>
+            @Html.TextAreaFor(model => model.Message, new { @class = "form-control custom-input", rows = "4", placeholder = "Write your opinion here ..." })
         </div>
 
         <div class="mb-4 text-center">
-            <label class="d-block text-warning small mb-2">Bu özellik ne kadar önemli?</label>
+            <label class="d-block text-warning small mb-2">How important is this feature?</label>
             <div id="rating-container" class="star-rating">
                 @for (int i = 1; i <= 5; i++)
                 {
@@ -40,11 +40,11 @@ Layout = "_customerNavBar";
         </div>
 
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-warning fw-bold py-2 shadow-effect">İsteği Gönder</button>
+            <button type="submit" class="btn btn-warning fw-bold py-2 shadow-effect">Send Request</button>
         </div>
 
         <div class="text-center mt-3">
-            <a asp-controller="Customer" asp-action="CustomerDashboard" class="text-white-50 text-decoration-none small hover-underline">← Vazgeç</a>
+            <a asp-controller="Customer" asp-action="CustomerDashboard" class="text-white-50 text-decoration-none small hover-underline">← Cancel</a>
         </div>
         }
     </div>
@@ -89,7 +89,7 @@ Layout = "_customerNavBar";
 </script>
 
 <style>
-    /* Ortak Stiller (Arka plan ve Kart) */
+    /*Background and Cart*/
     .fixed-background {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1950&q=80');
@@ -106,7 +106,7 @@ Layout = "_customerNavBar";
         width: 70px; height: 70px; line-height: 70px; border-radius: 50%; margin: 0 auto;
     }
 
-    /* Form Stilleri */
+    /* Form Styles */
     .custom-input {
         background: rgba(0, 0, 0, 0.4) !important;
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -117,17 +117,17 @@ Layout = "_customerNavBar";
         background: rgba(0, 0, 0, 0.6) !important; border-color: #ffc107;
     }
 
-    /* Yıldız Oylama Stili (Dark Tema Uyarlaması) */
+    
     .star-rating {
         display: inline-flex;
         font-size: 2.5rem;
         background: rgba(0,0,0,0.3);
         padding: 5px 20px;
-        border-radius: 50px; /* Hap şeklinde arka plan */
+        border-radius: 50px; 
     }
 
     .star {
-        color: #555; /* Pasif yıldız rengi (Koyu Gri) */
+        color: #555; 
         cursor: pointer;
         transition: color 0.2s, transform 0.2s;
         padding: 0 5px;
@@ -135,9 +135,9 @@ Layout = "_customerNavBar";
 
     .star:hover,
     .star.selected {
-        color: #ffc107; /* Aktif yıldız rengi (Altın Sarısı) */
-        text-shadow: 0 0 15px rgba(255, 193, 7, 0.6); /* Parlama Efekti */
-        transform: scale(1.1); /* Seçilince hafif büyür */
+        color: #ffc107; 
+        text-shadow: 0 0 15px rgba(255, 193, 7, 0.6); 
+        transform: scale(1.1); 
     }
 
     .shadow-effect:hover { box-shadow: 0 0 15px rgba(255, 193, 7, 0.4); }

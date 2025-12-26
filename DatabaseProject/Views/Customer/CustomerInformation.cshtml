@@ -17,24 +17,22 @@
 
         <div class="info-grid">
             <div class="info-item">
-                <label>Email Adresi</label>
+                <label>Email Address</label>
                 <div class="info-value">@Model.Email</div>
             </div>
             <div class="info-item">
-                <label>Kayıt Tarihi</label>
+                <label>Record Date</label>
                 <div class="info-value">@Model.HireDate.ToShortDateString()</div>
             </div>
         </div>
 
         <div class="text-center mt-5">
-            <a asp-controller="Customer" asp-action="CustomerDashboard" class="btn btn-outline-light px-4">← Panele Dön</a>
+            <a asp-controller="Customer" asp-action="CustomerDashboard" class="btn btn-outline-light px-4">← Back to Panel</a>
         </div>
     </div>
 </div>
 
 <style>
-    /* Önceki sayfadaki .fixed-background ve .glass-card stilleri burada da geçerli olmalı. 
-       Eğer _Layout'a koymadıysan buraya da eklemelisin. Ben ekstra stilleri yazıyorum: */
     
     .fixed-background {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;

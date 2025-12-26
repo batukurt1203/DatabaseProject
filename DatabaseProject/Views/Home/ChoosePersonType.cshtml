@@ -32,7 +32,7 @@ ViewData["Title"] = "Giriş Tipi Seçimi";
 </div>
 
 <style>
-    /* 1. ARKA PLAN VE GENEL AYARLAR */
+    
     body {
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Daha modern font */
@@ -41,42 +41,42 @@ ViewData["Title"] = "Giriş Tipi Seçimi";
     }
 
     .background-container {
-        position: fixed;  /* EKLENDİ: Layout kısıtlamalarını görmezden gelir */
-        top: 0;           /* EKLENDİ: En tepeye yapıştırır */
-        left: 0;          /* EKLENDİ: En sola yapıştırır */
-        width: 100%;      /* Genişliği zorlar */
-        height: 100%;     /* Yüksekliği zorlar */
+        position: fixed;  
+        top: 0;           
+        left: 0;          
+        width: 100%;      
+        height: 100%;     
 
-        /* Arka plan ayarları aynen kalıyor */
+        
         background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
         url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-        background-size: cover;       /* Resmi ekrana sığdırır */
-        background-position: center;  /* Resmi ortalar */
-        background-repeat: no-repeat; /* Tekrar etmesini engeller */
+        background-size: cover;       
+        background-position: center;  
+        background-repeat: no-repeat; 
 
-        z-index: 99; /* Diğer layout öğelerinin üstüne çıkmasını sağlar (Gerekirse artırın) */
+        z-index: 99; 
     }
 
-    /* 2. GLASSMORPHISM (CAM) KART TASARIMI */
+    
     .glass-card {
-        background: rgba(255, 255, 255, 0.05); /* Çok hafif beyaz transparanlık */
-        backdrop-filter: blur(15px); /* Arka planı buzlar */
-        -webkit-backdrop-filter: blur(15px); /* Safari desteği */
-        border: 1px solid rgba(255, 255, 255, 0.1); /* İnce çerçeve */
+        background: rgba(255, 255, 255, 0.05); 
+        backdrop-filter: blur(15px); 
+        -webkit-backdrop-filter: blur(15px); 
+        border: 1px solid rgba(255, 255, 255, 0.1); 
         border-radius: 20px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Derinlik katan gölge */
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
         width: 100%;
-        max-width: 450px; /* Kartın çok genişlemesini engeller */
+        max-width: 450px; 
         color: white;
         transition: transform 0.3s ease;
     }
 
     .glass-card:hover {
-        transform: translateY(-5px); /* Kart üzerine gelince hafifçe yukarı kalkar */
+        transform: translateY(-5px); 
         box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
     }
 
-    /* 3. METİN STİLLERİ */
+    
     .form-title {
         font-weight: 700;
         letter-spacing: 1px;
@@ -88,7 +88,7 @@ ViewData["Title"] = "Giriş Tipi Seçimi";
         font-size: 0.9rem;
     }
 
-    /* 4. MODERN BUTONLAR */
+    
     .btn-modern {
         display: flex;
         justify-content: space-between;
@@ -103,21 +103,20 @@ ViewData["Title"] = "Giriş Tipi Seçimi";
         overflow: hidden;
     }
 
-    /* Ana Renk (Sarı tonu - Markana uygun) */
     .btn-primary-custom {
         background: linear-gradient(45deg, #FFC107, #FFD54F);
         color: #212529;
         box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
     }
 
-    /* İkinci Renk (Daha koyu/farklı bir ton) */
+    
     .btn-secondary-custom {
         background: rgba(255, 255, 255, 0.1);
         color: white;
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    /* Buton Hover Efektleri */
+    
     .btn-primary-custom:hover {
         background: linear-gradient(45deg, #FFD54F, #FFC107);
         transform: scale(1.02);
@@ -136,10 +135,10 @@ ViewData["Title"] = "Giriş Tipi Seçimi";
     }
 
     .btn-modern:hover .btn-arrow {
-        transform: translateX(5px); /* Ok işareti sağa kayar */
+        transform: translateX(5px); 
     }
 
-    /* 5. ALT LİNKLER */
+    
     .footer-link p {
         margin-bottom: 5px;
         font-size: 0.9rem;

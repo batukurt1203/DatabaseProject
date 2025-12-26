@@ -8,8 +8,8 @@
 <div class="container content-wrapper">
     <div class="row mb-4">
         <div class="col-12 text-center text-white">
-            <h2 class="dashboard-title">Müşteri Paneli</h2>
-            <p class="text-white-50">Hesabınızı ve lisanslarınızı buradan yönetebilirsiniz.</p>
+            <h2 class="dashboard-title">Customer Panel</h2>
+            <p class="text-white-50">You can manage your account and licences from here.</p>
         </div>
     </div>
 
@@ -18,8 +18,8 @@
             <a asp-controller="Customer" asp-action="CustomerInformation" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">👤</div>
-                    <h5>Profilim</h5>
-                    <p class="small text-white-50">Bilgilerini görüntüle</p>
+                    <h5>My Profile</h5>
+                    <p class="small text-white-50">View your informations.</p>
                 </div>
             </a>
         </div>
@@ -28,8 +28,8 @@
             <a asp-controller="Customer" asp-action="BuyLicense" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">💳</div>
-                    <h5>Lisans Satın Al</h5>
-                    <p class="small text-white-50">Yeni ürün lisansı edin</p>
+                    <h5>Buy a licence</h5>
+                    <p class="small text-white-50"> Have a new product licence</p>
                 </div>
             </a>
         </div>
@@ -38,8 +38,8 @@
             <a asp-controller="Customer" asp-action="GetLicense" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">🔑</div>
-                    <h5>Lisanslarım</h5>
-                    <p class="small text-white-50">Aktif lisanslarını gör</p>
+                    <h5>My Licences</h5>
+                    <p class="small text-white-50"> Show my active licences</p>
                 </div>
             </a>
         </div>
@@ -48,8 +48,8 @@
             <a asp-controller="Customer" asp-action="BugReport" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">🐛</div>
-                    <h5>Hata Bildir</h5>
-                    <p class="small text-white-50">Sorunları bize ilet</p>
+                    <h5>Report Bug</h5>
+                    <p class="small text-white-50"> Send the problems to us.</p>
                 </div>
             </a>
         </div>
@@ -58,8 +58,8 @@
             <a asp-controller="Customer" asp-action="FeatureRequest" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">✨</div>
-                    <h5>Özellik İste</h5>
-                    <p class="small text-white-50">Yeni fikirlerini paylaş</p>
+                    <h5>Ask for Request</h5>
+                    <p class="small text-white-50">Share your new opinions</p>
                 </div>
             </a>
         </div>
@@ -67,7 +67,7 @@
 </div>
 
 <style>
-    /* Sabit Arka Plan - Z-Index -1 ile içeriğin arkasına atıyoruz */
+    /* Fixed Background */
     .fixed-background {
         position: fixed;
         top: 0;
@@ -82,7 +82,7 @@
     }
 
     .content-wrapper {
-        padding-top: 50px; /* Navbar payı */
+        padding-top: 50px; 
     }
 
     .dashboard-title {
@@ -90,8 +90,7 @@
         letter-spacing: 2px;
         margin-bottom: 10px;
     }
-
-    /* Glassmorphism Kartlar */
+    
     .glass-card {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(10px);
@@ -105,7 +104,7 @@
     .hover-effect:hover {
         transform: translateY(-5px);
         background: rgba(255, 255, 255, 0.1);
-        border-color: #ffc107; /* Hover'da sarı çerçeve */
+        border-color: #ffc107; 
     }
 
     .card-link {

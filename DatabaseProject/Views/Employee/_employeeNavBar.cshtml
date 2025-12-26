@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        /* GENEL SAYFA AYARLARI */
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: black;
@@ -22,27 +22,26 @@
             align-items: stretch;
         }
 
-        /* SIDEBAR (SOL MENÜ) TASARIMI */
         #sidebar {
             min-width: 260px;
             max-width: 260px;
-            background: rgba(20, 20, 20, 0.95); /* Koyu zemin */
+            background: rgba(20, 20, 20, 0.95); 
             backdrop-filter: blur(10px);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
             min-height: 100vh;
-            position: fixed; /* Sabit Menü */
+            position: fixed; 
             z-index: 1000;
             transition: all 0.3s;
         }
 
         #sidebar .sidebar-header {
             padding: 30px 20px;
-            background: rgba(13, 110, 253, 0.1); /* Çalışanlar için Mavi tonlu başlık */
+            background: rgba(13, 110, 253, 0.1); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         #sidebar .sidebar-header h3 {
-            color: #0d6efd; /* Bootstrap Primary Blue */
+            color: #0d6efd; 
             font-size: 1.2rem;
             margin: 0;
             font-weight: 700;
@@ -81,7 +80,7 @@
             transform: translateX(5px);
         }
 
-        /* ÇIKIŞ BUTONU */
+        
         .logout-section {
             position: absolute;
             bottom: 20px;
@@ -107,11 +106,10 @@
             color: white;
         }
 
-        /* İÇERİK ALANI */
         #content {
             width: 100%;
             padding: 20px;
-            margin-left: 260px; /* Sidebar boşluğu */
+            margin-left: 260px; 
             min-height: 100vh;
         }
     </style>
@@ -127,7 +125,7 @@
         <ul class="components">
             <li>
                 <a asp-controller="Employee" asp-action="EmployeeDashboard">
-                    <i class="fas fa-home"></i> Ana Panel
+                    <i class="fas fa-home"></i> Main Panel
                 </a>
             </li>
 
@@ -135,14 +133,14 @@
 
             <li>
                 <a asp-controller="Employee" asp-action="GetProjects">
-                    <i class="fas fa-project-diagram"></i> Projelerim
+                    <i class="fas fa-project-diagram"></i> My Projects
                 </a>
             </li>
             </ul>
 
         <div class="logout-section">
             <a asp-controller="Home" asp-action="Logout" class="btn-logout">
-                <i class="fas fa-sign-out-alt me-2"></i> Çıkış Yap
+                <i class="fas fa-sign-out-alt me-2"></i> Exit
             </a>
         </div>
     </nav>
