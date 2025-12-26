@@ -1,55 +1,161 @@
-﻿
-<div class="d-flex justify-content-center align-items-center vh-100 bg-black">
-    <div class="form bg-dark-gray p-4 rounded">
-        <h2 class="text-center text-white mb-4">Choose Register Type</h2>
-        <div class="form-group text-center">
-            <a asp-controller="Home" asp-action="CustomerRegister" class="btn btn-dark-yellow w-100 mb-3">Register as Customer</a>
-            <a asp-controller="Home" asp-action="EmployeeRegister" class="btn btn-dark-yellow w-100">Register as Employee</a>
-            <a asp-controller="Home" asp-action="Login" class="text-warning d-block mt-3">Do you have an account? Please log in!</a>
+﻿@{
+ViewData["Title"] = "Giriş Tipi Seçimi";
+}
+
+<div class="background-container d-flex justify-content-center align-items-center">
+
+    <div class="glass-card p-5">
+        <div class="text-center mb-4">
+            <div class="icon-circle mb-3">
+                <i class="bi bi-people-fill"></i> </div>
+            <h2 class="form-title">Welcome</h2>
+            <p class="form-subtitle">Please choose the type of person</p>
+        </div>
+
+        <div class="d-grid gap-3">
+            <a asp-controller="Home" asp-action="CustomerRegister" class="btn btn-modern btn-primary-custom">
+                <span class="btn-text">Register as Customer</span>
+                <span class="btn-arrow">→</span>
+            </a>
+
+            <a asp-controller="Home" asp-action="EmployeeRegister" class="btn btn-modern btn-secondary-custom">
+                <span class="btn-text">Register as Employee</span>
+                <span class="btn-arrow">→</span>
+            </a>
+        </div>
+
+        <div class="footer-link mt-4 text-center">
+            <p>Do you already have an account</p>
+            <a asp-controller="Home" asp-action="Login" class="login-link">Log In</a>
         </div>
     </div>
 </div>
 
 <style>
+    /* 1. ARKA PLAN VE GENEL AYARLAR */
     body {
         margin: 0;
-        background-color: black;
-        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Daha modern font */
         height: 100vh;
         overflow: hidden;
     }
-    .d-flex {
+
+    .background-container {
+        position: fixed;  /* EKLENDİ: Layout kısıtlamalarını görmezden gelir */
+        top: 0;           /* EKLENDİ: En tepeye yapıştırır */
+        left: 0;          /* EKLENDİ: En sola yapıştırır */
+        width: 100%;      /* Genişliği zorlar */
+        height: 100%;     /* Yüksekliği zorlar */
+
+        /* Arka plan ayarları aynen kalıyor */
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+        url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;       /* Resmi ekrana sığdırır */
+        background-position: center;  /* Resmi ortalar */
+        background-repeat: no-repeat; /* Tekrar etmesini engeller */
+
+        z-index: 99; /* Diğer layout öğelerinin üstüne çıkmasını sağlar (Gerekirse artırın) */
+    }
+
+    /* 2. GLASSMORPHISM (CAM) KART TASARIMI */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05); /* Çok hafif beyaz transparanlık */
+        backdrop-filter: blur(15px); /* Arka planı buzlar */
+        -webkit-backdrop-filter: blur(15px); /* Safari desteği */
+        border: 1px solid rgba(255, 255, 255, 0.1); /* İnce çerçeve */
+        border-radius: 20px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Derinlik katan gölge */
+        width: 100%;
+        max-width: 450px; /* Kartın çok genişlemesini engeller */
+        color: white;
+        transition: transform 0.3s ease;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-5px); /* Kart üzerine gelince hafifçe yukarı kalkar */
+        box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    /* 3. METİN STİLLERİ */
+    .form-title {
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-subtitle {
+        color: #aaa;
+        font-size: 0.9rem;
+    }
+
+    /* 4. MODERN BUTONLAR */
+    .btn-modern {
         display: flex;
-    }
-    .justify-content-center {
-        justify-content: center;
-    }
-    .align-items-center {
+        justify-content: space-between;
         align-items: center;
-    }
-    .vh-100 {
-        height: 100vh;
-    }
-    .bg-dark-gray {
-        background-color: #333;
-        color: white;
-    }
-    .rounded {
-        border-radius: 8px;
-    }
-    .btn-dark-yellow {
-        background-color: #ffcc00;
-        color: black;
+        padding: 15px 25px;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 600;
         border: none;
+        position: relative;
+        overflow: hidden;
     }
-    .btn-dark-yellow:hover {
-        background-color: #e6b800;
-        color: black;
+
+    /* Ana Renk (Sarı tonu - Markana uygun) */
+    .btn-primary-custom {
+        background: linear-gradient(45deg, #FFC107, #FFD54F);
+        color: #212529;
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
     }
-    .p-4 {
-        padding: 1.5rem;
-    }
-    .text-white {
+
+    /* İkinci Renk (Daha koyu/farklı bir ton) */
+    .btn-secondary-custom {
+        background: rgba(255, 255, 255, 0.1);
         color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Buton Hover Efektleri */
+    .btn-primary-custom:hover {
+        background: linear-gradient(45deg, #FFD54F, #FFC107);
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+    }
+
+    .btn-secondary-custom:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: scale(1.02);
+    }
+
+    .btn-arrow {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-modern:hover .btn-arrow {
+        transform: translateX(5px); /* Ok işareti sağa kayar */
+    }
+
+    /* 5. ALT LİNKLER */
+    .footer-link p {
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+
+    .login-link {
+        color: #FFC107;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+        border-bottom: 1px solid transparent;
+    }
+
+    .login-link:hover {
+        color: #FFD54F;
+        border-bottom: 1px solid #FFD54F;
     }
 </style>

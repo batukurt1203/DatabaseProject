@@ -1,12 +1,118 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Customer Dashboard";
     Layout = "_customerNavBar";
 }
 
+<div class="fixed-background"></div>
 
+<div class="container content-wrapper">
+    <div class="row mb-4">
+        <div class="col-12 text-center text-white">
+            <h2 class="dashboard-title">Müşteri Paneli</h2>
+            <p class="text-white-50">Hesabınızı ve lisanslarınızı buradan yönetebilirsiniz.</p>
+        </div>
+    </div>
 
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-4 col-lg-3">
+            <a asp-controller="Customer" asp-action="CustomerInformation" class="card-link">
+                <div class="glass-card text-center p-4 h-100 hover-effect">
+                    <div class="icon-box mb-3">👤</div>
+                    <h5>Profilim</h5>
+                    <p class="small text-white-50">Bilgilerini görüntüle</p>
+                </div>
+            </a>
+        </div>
 
+        <div class="col-md-4 col-lg-3">
+            <a asp-controller="Customer" asp-action="BuyLicense" class="card-link">
+                <div class="glass-card text-center p-4 h-100 hover-effect">
+                    <div class="icon-box mb-3">💳</div>
+                    <h5>Lisans Satın Al</h5>
+                    <p class="small text-white-50">Yeni ürün lisansı edin</p>
+                </div>
+            </a>
+        </div>
 
+        <div class="col-md-4 col-lg-3">
+            <a asp-controller="Customer" asp-action="GetLicense" class="card-link">
+                <div class="glass-card text-center p-4 h-100 hover-effect">
+                    <div class="icon-box mb-3">🔑</div>
+                    <h5>Lisanslarım</h5>
+                    <p class="small text-white-50">Aktif lisanslarını gör</p>
+                </div>
+            </a>
+        </div>
 
+        <div class="col-md-4 col-lg-3">
+            <a asp-controller="Customer" asp-action="BugReport" class="card-link">
+                <div class="glass-card text-center p-4 h-100 hover-effect">
+                    <div class="icon-box mb-3">🐛</div>
+                    <h5>Hata Bildir</h5>
+                    <p class="small text-white-50">Sorunları bize ilet</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 col-lg-3">
+            <a asp-controller="Customer" asp-action="FeatureRequest" class="card-link">
+                <div class="glass-card text-center p-4 h-100 hover-effect">
+                    <div class="icon-box mb-3">✨</div>
+                    <h5>Özellik İste</h5>
+                    <p class="small text-white-50">Yeni fikirlerini paylaş</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Sabit Arka Plan - Z-Index -1 ile içeriğin arkasına atıyoruz */
+    .fixed-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), 
+                    url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+        background-position: center;
+        z-index: -1; 
+    }
+
+    .content-wrapper {
+        padding-top: 50px; /* Navbar payı */
+    }
+
+    .dashboard-title {
+        font-weight: 300;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
+    /* Glassmorphism Kartlar */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        color: white;
+        transition: transform 0.3s ease, background 0.3s;
+    }
+
+    .hover-effect:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #ffc107; /* Hover'da sarı çerçeve */
+    }
+
+    .card-link {
+        text-decoration: none;
+    }
+
+    .icon-box {
+        font-size: 2.5rem;
+    }
+</style>
