@@ -1,0 +1,86 @@
+﻿@model DatabaseProject.Models.BugReportModel
+@{
+    Layout = "_customerNavBar";
+}
+
+<div class="fixed-background"></div>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="glass-card p-5 w-100" style="max-width: 600px;">
+        <div class="text-center mb-4">
+            <div class="icon-circle mb-3">🐛</div>
+            <h2 class="mb-2">Hata Bildir</h2>
+            <p class="text-white-50 small">Yaşadığınız teknik bir sorunu bize detaylıca iletin.</p>
+        </div>
+
+        @using (Html.BeginForm("SubmitBugReport", "Customer", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-warning small">Ürün Adı</label>
+                    @Html.DropDownListFor(model => model.ProductName, 
+                        new SelectList(ViewBag.Products, "Value", "Text"), 
+                        "Ürün seçiniz...", 
+                        new { @class = "form-control custom-input" })
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-warning small">Versiyon ID</label>
+                    @Html.TextBoxFor(model => model.VersionID, new { @class = "form-control custom-input", placeholder = "Örn: 1.2.0" })
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label text-warning small">Hata Detayı</label>
+                @Html.TextAreaFor(model => model.Message, new { @class = "form-control custom-input", rows = "5", placeholder = "Hatayı nasıl aldığınızı açıklayın..." })
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-warning fw-bold py-2 shadow-effect">Raporu Gönder</button>
+            </div>
+
+            <div class="text-center mt-3">
+                <a asp-controller="Customer" asp-action="CustomerDashboard" class="text-white-50 text-decoration-none small hover-underline">← İptal Et ve Dön</a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Arka Plan */
+    .fixed-background {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+    }
+
+    /* Kart Tasarımı */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: white;
+    }
+
+    .icon-circle {
+        font-size: 2.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        width: 70px; height: 70px; line-height: 70px; border-radius: 50%; margin: 0 auto;
+    }
+
+    /* Input Alanları */
+    .custom-input {
+        background: rgba(0, 0, 0, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white !important;
+        border-radius: 8px;
+    }
+
+    .custom-input:focus {
+        background: rgba(0, 0, 0, 0.6) !important;
+        border-color: #ffc107;
+        box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+    }
+    
+    /* Hover Efektleri */
+    .hover-underline:hover { text-decoration: underline !important; color: #ffc107 !important; }
+    .shadow-effect:hover { box-shadow: 0 0 15px rgba(255, 193, 7, 0.4); }
+</style>

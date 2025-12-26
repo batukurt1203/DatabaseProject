@@ -1,0 +1,81 @@
+﻿@model List<DatabaseProject.Models.LicenseViewModel>
+@{
+    Layout = "_customerNavBar";
+}
+
+<div class="fixed-background"></div>
+
+<div class="container mt-5">
+    <div class="glass-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3>Lisanslarım</h3>
+            <span class="badge bg-warning text-dark">Toplam: @Model.Count</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-dark table-hover table-transparent">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Başlangıç</th>
+                        <th>Bitiş</th>
+                        <th>Ücret</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var license in Model)
+                    {
+                        // Basit bir durum kontrolü (Görsellik için)
+                        var isActive = license.EndDate > DateTime.Now;
+                        var statusClass = isActive ? "text-success" : "text-danger";
+                        var statusText = isActive ? "Aktif" : "Süresi Dolmuş";
+
+                        <tr>
+                            <td class="fw-bold text-warning">@license.ProductName</td>
+                            <td>@license.StartDate.ToShortDateString()</td>
+                            <td>@license.EndDate.ToShortDateString()</td>
+                            <td>@license.TotalFee.ToString("C")</td>
+                            <td class="@statusClass">● @statusText</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <a asp-controller="Customer" asp-action="CustomerDashboard" class="text-white-50 text-decoration-none hover-underline">← Geri Dön</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Ortak background kodunu buraya da eklemeyi unutma (veya site.css'e taşı) */
+    .fixed-background {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: white;
+    }
+
+    /* Tablo Özelleştirme */
+    .table-transparent {
+        --bs-table-bg: transparent;
+        --bs-table-color: white;
+        --bs-table-border-color: rgba(255,255,255,0.1);
+    }
+    
+    .table-transparent th {
+        font-weight: 300; text-transform: uppercase; font-size: 0.85rem; color: #aaa; border-bottom: 2px solid #ffc107;
+    }
+    
+    .table-transparent td {
+        vertical-align: middle; padding: 15px 10px;
+    }
+
+    .hover-underline:hover { text-decoration: underline !important; color: #ffc107 !important; }
+</style>

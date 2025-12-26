@@ -1,0 +1,145 @@
+﻿@model DatabaseProject.Models.FeatureRequestModel
+@{
+Layout = "_customerNavBar";
+}
+
+<div class="fixed-background"></div>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="glass-card p-5 w-100" style="max-width: 600px;">
+        <div class="text-center mb-4">
+            <div class="icon-circle mb-3">✨</div>
+            <h2 class="mb-2">Özellik İste</h2>
+            <p class="text-white-50 small">Ürünlerimizde görmek istediğiniz yenilikleri paylaşın.</p>
+        </div>
+
+        @using (Html.BeginForm("SubmitFeatureRequest", "Customer", FormMethod.Post))
+        {
+        <div class="mb-3">
+            <label class="form-label text-warning small">İlgili Ürün</label>
+            @Html.DropDownListFor(model => model.ProductName,
+            new SelectList(ViewBag.Products, "Value", "Text"),
+            "Bir ürün seçiniz...",
+            new { @class = "form-control custom-input" })
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-warning small">Öneri / İstek</label>
+            @Html.TextAreaFor(model => model.Message, new { @class = "form-control custom-input", rows = "4", placeholder = "Fikrinizi buraya yazın..." })
+        </div>
+
+        <div class="mb-4 text-center">
+            <label class="d-block text-warning small mb-2">Bu özellik ne kadar önemli?</label>
+            <div id="rating-container" class="star-rating">
+                @for (int i = 1; i <= 5; i++)
+                {
+                <span class="star" data-value="@i">&#9733;</span>
+                }
+            </div>
+            @Html.HiddenFor(model => model.Rating, new { id = "Rating" })
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-warning fw-bold py-2 shadow-effect">İsteği Gönder</button>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-controller="Customer" asp-action="CustomerDashboard" class="text-white-50 text-decoration-none small hover-underline">← Vazgeç</a>
+        </div>
+        }
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const stars = document.querySelectorAll(".star");
+        const ratingInput = document.getElementById("Rating");
+
+        stars.forEach((star) => {
+            star.addEventListener("mouseenter", function () {
+                resetStars();
+                highlightStars(this.dataset.value);
+            });
+
+            star.addEventListener("mouseleave", function () {
+                resetStars();
+                highlightStars(ratingInput.value);
+            });
+
+            star.addEventListener("click", function () {
+                ratingInput.value = this.dataset.value;
+                highlightStars(this.dataset.value);
+            });
+        });
+
+        function resetStars() {
+            stars.forEach((star) => {
+                star.classList.remove("selected");
+            });
+        }
+
+        function highlightStars(rating) {
+            stars.forEach((star) => {
+                if (parseInt(star.dataset.value) <= parseInt(rating)) {
+                    star.classList.add("selected");
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    /* Ortak Stiller (Arka plan ve Kart) */
+    .fixed-background {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: white;
+    }
+
+    .icon-circle {
+        font-size: 2.5rem; background: rgba(255, 255, 255, 0.1);
+        width: 70px; height: 70px; line-height: 70px; border-radius: 50%; margin: 0 auto;
+    }
+
+    /* Form Stilleri */
+    .custom-input {
+        background: rgba(0, 0, 0, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white !important;
+        border-radius: 8px;
+    }
+    .custom-input:focus {
+        background: rgba(0, 0, 0, 0.6) !important; border-color: #ffc107;
+    }
+
+    /* Yıldız Oylama Stili (Dark Tema Uyarlaması) */
+    .star-rating {
+        display: inline-flex;
+        font-size: 2.5rem;
+        background: rgba(0,0,0,0.3);
+        padding: 5px 20px;
+        border-radius: 50px; /* Hap şeklinde arka plan */
+    }
+
+    .star {
+        color: #555; /* Pasif yıldız rengi (Koyu Gri) */
+        cursor: pointer;
+        transition: color 0.2s, transform 0.2s;
+        padding: 0 5px;
+    }
+
+    .star:hover,
+    .star.selected {
+        color: #ffc107; /* Aktif yıldız rengi (Altın Sarısı) */
+        text-shadow: 0 0 15px rgba(255, 193, 7, 0.6); /* Parlama Efekti */
+        transform: scale(1.1); /* Seçilince hafif büyür */
+    }
+
+    .shadow-effect:hover { box-shadow: 0 0 15px rgba(255, 193, 7, 0.4); }
+    .hover-underline:hover { text-decoration: underline !important; color: #ffc107 !important; }
+</style>

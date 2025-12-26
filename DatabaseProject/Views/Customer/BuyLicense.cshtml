@@ -1,0 +1,70 @@
+﻿@model DatabaseProject.Models.BuyLicenseModel
+@{
+    Layout = "_customerNavBar";
+}
+
+<div class="fixed-background"></div>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="glass-card p-5 w-100" style="max-width: 500px;">
+        <h2 class="text-center mb-4">Lisans Satın Al</h2>
+        
+        @using (Html.BeginForm("BuyLicense", "Customer", FormMethod.Post))
+        {
+            <div class="mb-4">
+                <label class="form-label text-white-50">Ürün Seçimi</label>
+                @Html.DropDownListFor(model => model.ProductName, 
+                    new SelectList(ViewBag.Products, "Value", "Text"), 
+                    "Bir ürün seçiniz...", 
+                    new { @class = "form-control custom-input" })
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label text-white-50">Lisans Süresi (Gün)</label>
+                @Html.TextBoxFor(model => model.LicenseTerm, new { @class = "form-control custom-input", placeholder = "Örn: 365" })
+            </div>
+  
+            <div class="d-grid gap-2 mt-5">
+                <button type="submit" class="btn btn-warning fw-bold py-2">Satın Almayı Tamamla</button>
+            </div>
+
+            <div class="text-center mt-3">
+                <a asp-controller="Customer" asp-action="CustomerDashboard" class="text-white-50 small text-decoration-none">İptal Et ve Dön</a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .fixed-background {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: white;
+    }
+
+    /* Modern Input Stilleri */
+    .custom-input {
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white !important;
+        border-radius: 8px;
+        padding: 12px;
+    }
+
+    .custom-input:focus {
+        background: rgba(0, 0, 0, 0.5) !important;
+        border-color: #ffc107;
+        box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+    }
+    
+    /* Select kutusu içindeki optionlar siyah olsun (okunabilirlik için) */
+    .custom-input option {
+        background-color: #333;
+        color: white;
+    }
+</style>

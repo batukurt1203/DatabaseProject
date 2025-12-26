@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Akademedya Personel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* GENEL SAYFA AYARLARI */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .wrapper {
+            display: flex;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        /* SIDEBAR (SOL MENÜ) TASARIMI */
+        #sidebar {
+            min-width: 260px;
+            max-width: 260px;
+            background: rgba(20, 20, 20, 0.95); /* Koyu zemin */
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 100vh;
+            position: fixed; /* Sabit Menü */
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        #sidebar .sidebar-header {
+            padding: 30px 20px;
+            background: rgba(13, 110, 253, 0.1); /* Çalışanlar için Mavi tonlu başlık */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        #sidebar .sidebar-header h3 {
+            color: #0d6efd; /* Bootstrap Primary Blue */
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        #sidebar ul.components {
+            padding: 20px 0;
+            list-style: none;
+        }
+
+        #sidebar ul li {
+            padding: 5px 15px;
+        }
+
+        #sidebar ul li a {
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            color: #bbb;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        #sidebar ul li a i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+
+        #sidebar ul li a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* ÇIKIŞ BUTONU */
+        .logout-section {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .btn-logout {
+            width: 100%;
+            background: rgba(220, 53, 69, 0.2);
+            color: #ff6b6b;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-logout:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* İÇERİK ALANI */
+        #content {
+            width: 100%;
+            padding: 20px;
+            margin-left: 260px; /* Sidebar boşluğu */
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header text-center">
+            <h3><i class="fas fa-id-card-alt me-2"></i>EMPLOYEE</h3>
+        </div>
+
+        <ul class="components">
+            <li>
+                <a asp-controller="Employee" asp-action="EmployeeDashboard">
+                    <i class="fas fa-home"></i> Ana Panel
+                </a>
+            </li>
+
+            <li class="my-2 border-top border-secondary opacity-25"></li>
+
+            <li>
+                <a asp-controller="Employee" asp-action="GetProjects">
+                    <i class="fas fa-project-diagram"></i> Projelerim
+                </a>
+            </li>
+            </ul>
+
+        <div class="logout-section">
+            <a asp-controller="Home" asp-action="Logout" class="btn-logout">
+                <i class="fas fa-sign-out-alt me-2"></i> Çıkış Yap
+            </a>
+        </div>
+    </nav>
+
+    <div id="content">
+        @RenderBody()
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
