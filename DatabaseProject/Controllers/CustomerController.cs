@@ -326,6 +326,88 @@ namespace DatabaseProject.Controllers {
 
             return View(customerInfo);
         }
+
+
+        // GET: Ticket Oluşturma Sayfası
+        [HttpGet]
+        public IActionResult CreateSupportTicket()
+        {
+            var products = new List<SelectListItem>();
+
+            // Ürün listesini çek (BugReport ile aynı mantık)
+            using (var command = sqlHelper.CreateCommand("SELECT ProductID, PName FROM PRODUCT_"))
+            {
+                sqlHelper.OpenConnection();
+                using (var reader = SqlHelper.ExecuteReader(command))
+                {
+                    while (reader.Read())
+                    {
+                        products.Add(new SelectListItem
+                        {
+                            Value = reader["PName"].ToString(),
+                            Text = reader["PName"].ToString()
+                        });
+                    }
+                }
+                sqlHelper.CloseConnection();
+            }
+
+            ViewBag.Products = products;
+            return View();
+        }
+
+        // POST: Ticket Kaydetme İşlemi
+        [HttpPost]
+        public IActionResult SubmitSupportTicket(CreateTicketViewModel model)
+        {
+            // Validasyon
+            if (!ModelState.IsValid)
+            {
+                // Hata varsa dropdown'ı tekrar doldurup sayfayı döndür
+                return CreateSupportTicket();
+            }
+
+            // JWT Token Kontrolü
+            var token = Request.Cookies["JWT"];
+            if (token == null) return RedirectToAction("Login", "Account"); // Login'e yönlendirmek daha güvenli
+
+            var principal = jwtService.ValidateToken(token);
+            if (principal == null) return RedirectToAction("Login", "Account");
+
+            var customerEmail = principal.FindFirst(ClaimTypes.Email)?.Value;
+
+            if (string.IsNullOrEmpty(customerEmail))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            try
+            {
+                // Stored Procedure'ü Çağır
+                using (var command = sqlHelper.CreateCommand("EXEC pro_CREATE_SUPPORT_TICKET @CustomerEmail, @ProductName, @IssueDescription"))
+                {
+                    SqlHelper.AddParameter(command, "@CustomerEmail", SqlDbType.NVarChar, customerEmail);
+                    SqlHelper.AddParameter(command, "@ProductName", SqlDbType.NVarChar, model.ProductName);
+                    SqlHelper.AddParameter(command, "@IssueDescription", SqlDbType.NVarChar, model.IssueDescription);
+
+                    sqlHelper.OpenConnection();
+                    SqlHelper.ExecuteNonQuery(command);
+                    sqlHelper.CloseConnection();
+                }
+
+                TempData["SuccessMessage"] = "Support ticket created successfully.";
+                return RedirectToAction("CustomerDashboard");
+            }
+            catch (Exception ex)
+            {
+                // Hata olursa loglayıp kullanıcıya gösterilebilir
+                ModelState.AddModelError(string.Empty, "An error occurred while creating the ticket: " + ex.Message);
+                return CreateSupportTicket();
+            }
+        }
+
+
+
         public IActionResult Logout()
         {
             

@@ -1,6 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Customer Dashboard";
-    Layout = "_customerNavBar";
+ViewData["Title"] = "Customer Dashboard";
+Layout = "_customerNavBar";
 }
 
 <div class="fixed-background"></div>
@@ -8,8 +8,8 @@
 <div class="container content-wrapper">
     <div class="row mb-4">
         <div class="col-12 text-center text-white">
-            <h2 class="dashboard-title">Customer Panel</h2>
-            <p class="text-white-50">You can manage your account and licences from here.</p>
+            <h2 class="dashboard-title">Müşteri Paneli</h2>
+            <p class="text-white-50">Hesabınızı ve lisanslarınızı buradan yönetebilirsiniz.</p>
         </div>
     </div>
 
@@ -18,8 +18,8 @@
             <a asp-controller="Customer" asp-action="CustomerInformation" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">👤</div>
-                    <h5>My Profile</h5>
-                    <p class="small text-white-50">View your informations.</p>
+                    <h5>Profilim</h5>
+                    <p class="small text-white-50">Bilgilerini görüntüle</p>
                 </div>
             </a>
         </div>
@@ -28,8 +28,8 @@
             <a asp-controller="Customer" asp-action="BuyLicense" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">💳</div>
-                    <h5>Buy a licence</h5>
-                    <p class="small text-white-50"> Have a new product licence</p>
+                    <h5>Lisans Satın Al</h5>
+                    <p class="small text-white-50">Yeni ürün lisansı edin</p>
                 </div>
             </a>
         </div>
@@ -38,18 +38,29 @@
             <a asp-controller="Customer" asp-action="GetLicense" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">🔑</div>
-                    <h5>My Licences</h5>
-                    <p class="small text-white-50"> Show my active licences</p>
+                    <h5>Lisanslarım</h5>
+                    <p class="small text-white-50">Aktif lisanslarını gör</p>
                 </div>
             </a>
         </div>
 
         <div class="col-md-4 col-lg-3">
+            <a asp-controller="Customer" asp-action="CreateSupportTicket" class="card-link">
+                <div class="glass-card text-center p-4 h-100 hover-effect">
+                    <div class="icon-box mb-3">🎧</div>
+                    <h5>Destek Talebi</h5>
+                    <p class="small text-white-50">Teknik destek kaydı aç</p>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="col-md-4 col-lg-3">
             <a asp-controller="Customer" asp-action="BugReport" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">🐛</div>
-                    <h5>Report Bug</h5>
-                    <p class="small text-white-50"> Send the problems to us.</p>
+                    <h5>Hata Bildir</h5>
+                    <p class="small text-white-50">Sorunları bize ilet</p>
                 </div>
             </a>
         </div>
@@ -58,8 +69,8 @@
             <a asp-controller="Customer" asp-action="FeatureRequest" class="card-link">
                 <div class="glass-card text-center p-4 h-100 hover-effect">
                     <div class="icon-box mb-3">✨</div>
-                    <h5>Ask for Request</h5>
-                    <p class="small text-white-50">Share your new opinions</p>
+                    <h5>Özellik İste</h5>
+                    <p class="small text-white-50">Yeni fikirlerini paylaş</p>
                 </div>
             </a>
         </div>
@@ -67,22 +78,22 @@
 </div>
 
 <style>
-    /* Fixed Background */
+    /* Sabit Arka Plan - Z-Index -1 ile içeriğin arkasına atıyoruz */
     .fixed-background {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), 
-                    url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)),
+        url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
         background-size: cover;
         background-position: center;
-        z-index: -1; 
+        z-index: -1;
     }
 
     .content-wrapper {
-        padding-top: 50px; 
+        padding-top: 50px; /* Navbar payı */
     }
 
     .dashboard-title {
@@ -90,7 +101,8 @@
         letter-spacing: 2px;
         margin-bottom: 10px;
     }
-    
+
+    /* Glassmorphism Kartlar */
     .glass-card {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(10px);

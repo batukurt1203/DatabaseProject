@@ -1,0 +1,78 @@
+﻿@model List<DatabaseProject.Models.EmployeeTicketViewModel>
+
+@{
+    ViewData["Title"] = "Assigned Support Requests";
+    Layout = "_employeeNavBar.cshtml"; 
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-tasks text-primary"></i> Support Requests You Are Responsible For</h2>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0 align-middle">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>#ID</th>
+                                <th>Product</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Problem Summary</th>
+                                <th>Transaction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ticket in Model)
+                            {
+                                <tr>
+                                    <td><strong>@ticket.TicketID</strong></td>
+                                    <td><span class="badge bg-info text-dark">@ticket.ProductName</span></td>
+                                    <td>@ticket.CustomerName</td>
+                                    <td>@ticket.DateOpened.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>
+                                        @if (ticket.Status == "Open")
+                                        {
+                                            <span class="badge bg-danger">Open</span>
+                                        }
+                                        else if (ticket.Status == "Closed")
+                                        {
+                                            <span class="badge bg-success">Closed</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning text-dark">@ticket.Status</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                            @ticket.IssueDescription
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="fas fa-eye"></i> View
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center py-5">
+            <i class="fas fa-check-circle fa-3x mb-3"></i>
+            <h4>Great!</h4>
+            <p>There are currently no open support requests for the products you are responsible for. </p>
+        </div>
+    }
+</div>

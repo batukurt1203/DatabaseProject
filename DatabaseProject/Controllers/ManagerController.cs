@@ -134,7 +134,7 @@ public class ManagerController(SqlHelper sqlHelper, JwtService jwtService) : Con
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = "Employee listesi yüklenirken hata oluştu: " + ex.Message;
+            TempData["ErrorMessage"] = "An error occurred while downloading the employee list: " + ex.Message;
         }
 
         return View(employees);
@@ -160,11 +160,11 @@ public class ManagerController(SqlHelper sqlHelper, JwtService jwtService) : Con
                 command.ExecuteNonQuery();
                 sqlHelper.CloseConnection();
             }
-            TempData["SuccessMessage"] = "Employee başarıyla eklendi. Varsayılan şifre: 0000";
+            TempData["SuccessMessage"] = "Employee added successfully. Default password: 0000";
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = "Employee eklenirken hata oluştu: " + ex.Message;
+            TempData["ErrorMessage"] = "An error occurred while adding the employee: " + ex.Message;
         }
 
         return RedirectToAction("ManageEmployees");
@@ -191,17 +191,17 @@ public class ManagerController(SqlHelper sqlHelper, JwtService jwtService) : Con
 
                 if (rowsAffected > 0)
                 {
-                    TempData["SuccessMessage"] = "Employee başarıyla silindi.";
+                    TempData["SuccessMessage"] = "Employee deleted successfully.";
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Employee bulunamadı.";
+                    TempData["ErrorMessage"] = "Employee could not found.";
                 }
             }
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = "Employee silinirken hata oluştu: " + ex.Message;
+            TempData["ErrorMessage"] = "An error occurred while deleting the employee" + ex.Message;
         }
 
         return RedirectToAction("ManageEmployees");
@@ -242,7 +242,7 @@ public class ManagerController(SqlHelper sqlHelper, JwtService jwtService) : Con
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = "Customer listesi yüklenirken hata oluştu: " + ex.Message;
+            TempData["ErrorMessage"] = "An error occurred while downloading the customer list: " + ex.Message;
         }
 
         return View(customers);
@@ -268,11 +268,11 @@ public class ManagerController(SqlHelper sqlHelper, JwtService jwtService) : Con
                 command.ExecuteNonQuery();
                 sqlHelper.CloseConnection();
             }
-            TempData["SuccessMessage"] = "Customer başarıyla eklendi. Varsayılan şifre: 0000";
+            TempData["SuccessMessage"] = "Customer added successfully. Default password: 0000";
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = "Customer eklenirken hata oluştu: " + ex.Message;
+            TempData["ErrorMessage"] = "An error occurred while adding the customer: " + ex.Message;
         }
 
         return RedirectToAction("ManageCustomers");
@@ -299,17 +299,17 @@ public class ManagerController(SqlHelper sqlHelper, JwtService jwtService) : Con
 
                 if (rowsAffected > 0)
                 {
-                    TempData["SuccessMessage"] = "Customer başarıyla silindi.";
+                    TempData["SuccessMessage"] = "Customer deleted successfully .";
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Customer bulunamadı.";
+                    TempData["ErrorMessage"] = "Customer could not found.";
                 }
             }
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = "Customer silinirken hata oluştu: " + ex.Message;
+            TempData["ErrorMessage"] = "An error occurred while deleting the customer: " + ex.Message;
         }
 
         return RedirectToAction("ManageCustomers");
